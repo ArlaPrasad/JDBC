@@ -1,0 +1,40 @@
+package jdbc1;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+
+public class RetriveDataWithPrepare {
+
+	public static void main(String[] args) {
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			Connection connect=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","system","tiger");
+			PreparedStatement pstmt=connect.prepareStatement("select * from records");
+			ResultSet result=pstmt.executeQuery("select * from records");
+			ResultSetMetaData rm=result.getMetaData();
+			int n=rm.getColumnCount();
+			for(int i=1;i<=n;i++) {
+				System.out.print(rm.getColumnName(i)+  "\t");
+			}
+			System.out.println();
+			while(result.next()) {
+				System.out.print(result.getInt(1)+ "\t");
+				System.out.print(result.getString(2)+ "\t");
+				System.out.println(result.getInt(3)+ "\t");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
+	}
+
+}
