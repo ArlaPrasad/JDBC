@@ -1,0 +1,26 @@
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class InsertValues {
+
+	public static void main(String[] args) {
+			try {
+				Class.forName("oracle.jdbc.driver.OracleDriver");
+				Connection connect=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","system","tiger");
+				Statement stmnt=connect.createStatement();
+				stmnt.executeUpdate("insert into collections1 values('venkat',8639877680,'ar43@gmail')");
+				System.out.println("values inserted into table");
+				stmnt.executeUpdate("insert into collections1 values('soumya',3987938291,'ar09@gmail')");
+				System.out.println("inserted record");
+				stmnt.executeUpdate("insert into collections1 values('narayan',7997652016,'ve4@gmail')");
+				System.out.println("record inserted");
+				
+			} catch (Exception e) {
+				e.printStackTrace();		
+	}
+	}
+}
