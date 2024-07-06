@@ -1,0 +1,30 @@
+package jdbc;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class TableCreate {
+
+	public static void main(String[] args) {
+	try {
+		Class.forName("oracle.jdbc.driver.OracleDriver");
+		Connection connect=DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl","system","tiger");
+		Statement stmnt=connect.createStatement();
+		stmnt.execute("create table collections1(studentname varchar2(20),studentnumber int,studentmails varchar2(10))");
+		System.out.println("table created successfully");
+		/*stmnt.executeUpdate("insert into collection values('venkat',8639877680,99)");
+		System.out.println("values inserted into table");*/
+		
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	}
+
+}
